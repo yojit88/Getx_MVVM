@@ -1,0 +1,4 @@
+enum LayoutTypes {
+  mobile,
+  tablet;
+}

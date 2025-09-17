@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:getx_testing/prototypeX/core/utils/app_exceptions.dart';
+import 'package:get/get.dart';
+import 'splash_screen_controller.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+  SplashScreen({super.key});
+
+  final SplashScreenController splashScreenController = Get.put(SplashScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +16,8 @@ class SplashScreen extends StatelessWidget {
       body: Column(
         children: [
           Center(
-            child: const Text('Hello, World!'),
+            child: const Text('Splash Screen'),
           ),
-          TextButton(
-            onPressed: () {
-              throw InternetExceptions("Jimmy");
-            },
-            child: Text("Throw error"),
-          )
         ],
       ),
     );
