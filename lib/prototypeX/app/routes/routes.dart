@@ -7,6 +7,10 @@ class AppPages {
 
   static final routes = [
     GetPage(
+      name: AppRoutes.dashBoardScreen,
+      page: () => DashboardScreen(),
+    ),
+    GetPage(
       name: AppRoutes.splashScreen,
       page: () => SplashScreen(),
     ),

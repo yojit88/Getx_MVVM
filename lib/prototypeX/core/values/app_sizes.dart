@@ -1,11 +1,44 @@
 // Base - figma design pixels
+import 'dart:io';
+import 'dart:math' as math;
+import '../utils/logs_helper.dart';
 
 class AppSizes {
-  static const baseWidth = 390.0;
-  static const baseHeight = 812.0;
-  static const dimenToPx0 = 0.0;
-  static const dimenToPx1 = 1.0;
-  static const dimenToPx1Point5 = 1.5;
+  // Width and height values based on Figma design specifications
+  static const double mobileBaseWidth = 600.00; // 600
+  static const double mobileBaseHeight = 912.00; // 912
+
+  // static const double mTabletBaseWidth = 600.00; // 600
+  // static const double mTabletBaseHeight = 912.00; // 912
+  //
+  // static const double lTabletBaseWidth = 600.00; // 600
+  // static const double lTabletBaseHeight = 912.00; // 912
+  // Device size (mutable)
+  static double _deviceWidth = 0.00;
+  static double _deviceHeight = 0.00;
+  static double _deviceWidthRatio = 0.00;
+  static double _deviceHeightRatio = 0.00;
+
+  // Getter
+  static double get deviceWidth => _deviceWidth;
+
+  static double get deviceHeight => _deviceHeight;
+
+  static double get deviceWidthRatio => _deviceWidthRatio;
+
+  static double get deviceHeightRatio => _deviceHeightRatio;
+
+  // Setter
+  static set deviceWidth(double value) => _deviceWidth = value;
+
+  static set deviceHeight(double value) => _deviceHeight = value;
+
+  static set deviceWidthRatio(double value) => _deviceWidthRatio = value;
+
+  static set deviceHeightRatio(double value) => _deviceHeightRatio = value;
+
+  static const double dimenToPx1 = 1.00;
+  static const dimenToPx1Point5 = 1.50;
   static const dimenToPx2 = 2.0;
   static const dimenToPx3 = 3.0;
   static const dimenToPx4 = 4.0;
@@ -46,26 +79,6 @@ class AppSizes {
   static const dimenToPx42 = 42.0;
   static const dimenToPx44 = 44.0;
   static const dimenToPx45 = 45.0;
-  static const dimenToPx46 = 46.0;
-  static const dimenToPx47 = 47.0;
-  static const dimenToPx48 = 48.0;
-  static const dimenToPx50 = 50.0;
-  static const dimenToPx52 = 52.0;
-  static const dimenToPx54 = 54.0;
-  static const dimenToPx56 = 56.0;
-  static const dimenToPx58 = 58.0;
-  static const dimenToPx60 = 60.0;
-  static const dimenToPx62 = 62.0;
-  static const dimenToPx64 = 64.0;
-  static const dimenToPx66 = 66.0;
-  static const dimenToPx67 = 67.0;
-  static const dimenToPx68 = 68.0;
-  static const dimenToPx70 = 70.0;
-  static const dimenToPx72 = 72.0;
-  static const dimenToPx74 = 74.0;
-  static const dimenToPx75 = 75.0;
-  static const dimenToPx76 = 76.0;
-  static const dimenToPx77 = 77.0;
   static const dimenToPx80 = 80.0;
   static const dimenToPx82 = 82.0;
   static const dimenToPx86 = 86.0;
@@ -73,60 +86,7 @@ class AppSizes {
   static const dimenToPx92 = 92.0;
   static const dimenToPx94 = 94.0;
   static const dimenToPx98 = 98.0;
-  static const dimenToPx100 = 100.0;
-  static const dimenToPx105 = 105.0;
-  static const dimenToPx110 = 110.0;
-  static const dimenToPx114 = 114.0;
-  static const dimenToPx117 = 117.0;
-  static const dimenToPx120 = 120.0;
-  static const dimenToPx123 = 123.0;
-  static const dimenToPx126 = 126.0;
-  static const dimenToPx130 = 130.0;
-  static const dimenToPx137 = 137.0;
-  static const dimenToPx140 = 140.0;
-  static const dimenToPx144 = 144.0;
-  static const dimenToPx145 = 145.0;
-  static const dimenToPx150 = 150.0;
-  static const dimenToPx155 = 155.0;
-  static const dimenToPx160 = 160.0;
-  static const dimenToPx162 = 162.0;
-  static const dimenToPx165 = 165.0;
-  static const dimenToPx170 = 170.0;
-  static const dimenToPx172 = 172.0;
-  static const dimenToPx174 = 174.0;
-  static const dimenToPx175 = 175.0;
-  static const dimenToPx180 = 180.0;
-  static const dimenToPx185 = 185.0;
-  static const dimenToPx186 = 186.0;
-  static const dimenToPx190 = 190.0;
-  static const dimenToPx200 = 200.0;
-  static const dimenToPx204 = 204.0;
-  static const dimenToPx208 = 208.0;
-  static const dimenToPx215 = 215.0;
-  static const dimenToPx220 = 220.0;
-  static const dimenToPx226 = 226.0;
-  static const dimenToPx236 = 236.0;
-  static const dimenToPx247 = 247.0;
-  static const dimenToPx250 = 250.0;
-  static const dimenToPx260 = 260.0;
-  static const dimenToPx268 = 268.0;
-  static const dimenToPx270 = 270.0;
-  static const dimenToPx276 = 276.0;
-  static const dimenToPx282 = 282.0;
-  static const dimenToPx289 = 289.0;
-  static const dimenToPx300 = 300.0;
-  static const dimenToPx314 = 314.0;
-  static const dimenToPx318 = 318.0;
-  static const dimenToPx320 = 320.0;
-  static const dimenToPx342 = 342.0;
-  static const dimenToPx343 = 343.0;
-  static const dimenToPx350 = 350.0;
-  static const dimenToPx400 = 400.0;
-  static const dimenToPx488 = 488.0;
-  static const dimenToPx500 = 500.0;
-  static const dimenToPx512 = 512.0;
-  static const dimenToPx611 = 611.0;
-  static const dimenToPx686 = 686.0;
+  static const dimenToPx100 = 100.00;
 }
 
 class AppTextSizes {
@@ -141,4 +101,44 @@ class AppTextSizes {
   static final text23 = AppSizes.dimenToPx23;
   static final text26 = AppSizes.dimenToPx26;
   static final text32 = AppSizes.dimenToPx32;
+}
+
+extension DoubleExtensions on double {
+  // Returns a scaled width value based on the device width ratio.
+  double get wc {
+    logger.w("Width ${this * AppSizes.deviceWidthRatio} WidthRatio ${AppSizes.deviceWidthRatio}");
+
+    return this * AppSizes.deviceWidthRatio;
+  }
+
+  // Returns a scaled height value based on the device height ratio.
+  double get hc {
+    logger.d("Height ${this * AppSizes.deviceHeightRatio}  HeightRatio ${AppSizes.deviceHeightRatio}");
+    return this * AppSizes.deviceHeightRatio;
+  }
+
+  // Returns the number rounded to two decimal places.
+  double get d2 {
+    return double.parse(toStringAsFixed(2));
+  }
+
+  // Returns a responsive scale factor based on both
+  double get rs {
+    logger.i(
+        "RS ${(this * math.pow(AppSizes.deviceWidthRatio, 0.5) * math.pow(AppSizes.deviceHeightRatio, 0.5)).toDouble()}");
+    return this * (math.pow(AppSizes.deviceWidthRatio, 0.5) * math.pow(AppSizes.deviceHeightRatio, 0.5)).toDouble();
+  }
+
+  double pfs({required double androidFs, required double iosFs}) {
+    if (Platform.isAndroid) {
+      return androidFs;
+    } else if (Platform.isIOS) {
+      return iosFs;
+    }
+    return this; // fallback to original size if not Android/iOS
+  }
+
+  double cfs(double Function(double value) testing) {
+    return testing(this);
+  }
 }
