@@ -29,12 +29,14 @@ extension DioExtensions on Dio {
         request: request, useDefaultErrorHandler: useDefaultErrorHandler);
     logger.i(result);
 
+
     switch (result) {
       case DataSuccess<Response>():
         return ApiResponseModel(
           isSuccessful: true,
           data: result.data?.data,
           message: result.data?.data[ApiFields.message],
+          statusCode: result.data?.statusCode,
         );
       case DataFailed():
         return ApiResponseModel(

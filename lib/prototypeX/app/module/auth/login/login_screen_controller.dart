@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_testing/prototypeX/app/data/service/notification_service.dart';
 import 'package:getx_testing/prototypeX/core/values/app_routes_name.dart';
 
 import '../../../../core/utils/logs_helper.dart';
@@ -8,6 +9,12 @@ import '../../loading/loading.dart';
 
 class LoginController extends GetxController {
   LoginController({this.loginService, this.authRepository});
+
+  @override
+  void onInit() {
+    super.onInit();
+    NotificationService.start();
+  }
 
   LoadingService? loginService;
   AuthRepository? authRepository;
@@ -24,11 +31,17 @@ class LoginController extends GetxController {
       loginService?.loading(Get.context!, true);
 
       var result = await authRepository!.login(
-        email: emailCtrl.text.trim(),
-        password: passCtrl.text.trim(),
+        // email: emailCtrl.text.trim(),
+        // password: passCtrl.text.trim(),
+        email: "Abc@gmail.com",
+        password: "Suthar@123",
       );
       // Perform any custom actions after the API response is received
       loginService?.loading(Get.context!, false);
+      logger.e(result.statusCode);
+      if (result.statusCode == 201) {
+        Get.offAllNamed(AppRoutes.dashBoardScreen);
+      }
     }
   }
 
@@ -39,5 +52,4 @@ class LoginController extends GetxController {
   void navigateToSignUp() {
     Get.toNamed(AppRoutes.signUpScreen);
   }
-
 }
