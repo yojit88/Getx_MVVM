@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 import 'package:getx_testing/prototypeX/core/values/values.dart';
 import '../dashboard_screen_controller.dart';
@@ -34,7 +34,7 @@ class DashboardView extends StatelessWidget {
                     ),
                     title: Text(
                       index % 2 == 0 ? "Custom" : "Package",
-                      style: TextStyle(fontWeight: FontWeight.w700, fontSize: index % 2 == 0 ? AppSizes.dimenToPx16.rs : 16.00),
+                      style: TextStyle(fontWeight: FontWeight.w700, fontSize: index % 2 == 0 ? 16.00.rs : 16.00),
                     ),
                     subtitle: Text(
                       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.......... Read More",

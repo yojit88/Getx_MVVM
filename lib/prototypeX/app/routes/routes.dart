@@ -22,5 +22,9 @@ class AppPages {
       name: AppRoutes.signUpScreen,
       page: () => SignupScreen(),
     ),
+    GetPage(
+      name: AppRoutes.testingScreen,
+      page: () => CustomSizeScreen(),
+    ),
   ];
 }

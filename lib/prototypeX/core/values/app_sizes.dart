@@ -1,23 +1,26 @@
 // Base - figma design pixels
 import 'dart:io';
 import 'dart:math' as math;
+import '../../app/data/types/layout_types.dart';
 import '../utils/logs_helper.dart';
 
 class AppSizes {
   // Width and height values based on Figma design specifications
-  static const double mobileBaseWidth = 600.00; // 600
-  static const double mobileBaseHeight = 912.00; // 912
+  static const double mobileBaseWidth = 360.00;
+  static const double mobileBaseHeight = 780.00;
 
-  // static const double mTabletBaseWidth = 600.00; // 600
-  // static const double mTabletBaseHeight = 912.00; // 912
-  //
-  // static const double lTabletBaseWidth = 600.00; // 600
-  // static const double lTabletBaseHeight = 912.00; // 912
+  static const double mTabletBaseWidth = 600.00;
+  static const double mTabletBaseHeight = 912.00;
+
+  static const double lTabletBaseWidth = 764.00;
+  static const double lTabletBaseHeight = 1050.00;
+
   // Device size (mutable)
   static double _deviceWidth = 0.00;
   static double _deviceHeight = 0.00;
   static double _deviceWidthRatio = 0.00;
   static double _deviceHeightRatio = 0.00;
+  static DeviceSize _deviceSize = DeviceSize.none;
 
   // Getter
   static double get deviceWidth => _deviceWidth;
@@ -28,6 +31,8 @@ class AppSizes {
 
   static double get deviceHeightRatio => _deviceHeightRatio;
 
+  static DeviceSize get deviceSize => _deviceSize;
+
   // Setter
   static set deviceWidth(double value) => _deviceWidth = value;
 
@@ -36,6 +41,8 @@ class AppSizes {
   static set deviceWidthRatio(double value) => _deviceWidthRatio = value;
 
   static set deviceHeightRatio(double value) => _deviceHeightRatio = value;
+
+  static set deviceSize(DeviceSize value) => _deviceSize = value;
 
   static const double dimenToPx1 = 1.00;
   static const dimenToPx1Point5 = 1.50;
@@ -106,14 +113,11 @@ class AppTextSizes {
 extension DoubleExtensions on double {
   // Returns a scaled width value based on the device width ratio.
   double get wc {
-    logger.w("Width ${this * AppSizes.deviceWidthRatio} WidthRatio ${AppSizes.deviceWidthRatio}");
-
     return this * AppSizes.deviceWidthRatio;
   }
 
   // Returns a scaled height value based on the device height ratio.
   double get hc {
-    logger.d("Height ${this * AppSizes.deviceHeightRatio}  HeightRatio ${AppSizes.deviceHeightRatio}");
     return this * AppSizes.deviceHeightRatio;
   }
 
@@ -124,9 +128,29 @@ extension DoubleExtensions on double {
 
   // Returns a responsive scale factor based on both
   double get rs {
-    logger.i(
-        "RS ${(this * math.pow(AppSizes.deviceWidthRatio, 0.5) * math.pow(AppSizes.deviceHeightRatio, 0.5)).toDouble()}");
     return this * (math.pow(AppSizes.deviceWidthRatio, 0.5) * math.pow(AppSizes.deviceHeightRatio, 0.5)).toDouble();
+  }
+
+  // Return a scaled width and height based on custom device ratio.
+  double crs({required double customWidth, required double customHeight}) {
+    double width;
+    double height;
+
+    switch (AppSizes.deviceSize) {
+      case DeviceSize.mobile:
+        width = AppSizes.mobileBaseWidth;
+        height = AppSizes.mobileBaseHeight;
+      case DeviceSize.mediumTablet:
+        width = AppSizes.mTabletBaseWidth;
+        height = AppSizes.mTabletBaseHeight;
+      case DeviceSize.largeTablet:
+        width = AppSizes.lTabletBaseWidth;
+        height = AppSizes.lTabletBaseHeight;
+      case DeviceSize.none:
+        width = AppSizes.mobileBaseWidth;
+        height = AppSizes.mobileBaseHeight;
+    }
+    return this * (math.pow(customWidth / width, 0.5) * math.pow(customHeight / height, 0.5)).toDouble();
   }
 
   double pfs({required double androidFs, required double iosFs}) {
