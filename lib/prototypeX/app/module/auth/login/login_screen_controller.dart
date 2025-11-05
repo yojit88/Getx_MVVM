@@ -39,5 +39,4 @@ class LoginController extends GetxController {
   void navigateToSignUp() {
     Get.toNamed(AppRoutes.signUpScreen);
   }
-
 }

@@ -27,14 +27,12 @@ class SignUpController extends GetxController {
 
   Future<void> signUp() async {
     if (formKey.currentState!.validate()) {
-      logger.f("Success");
       var result = await authRepository!.signup(
         username: userNameCtrl.text.trim(),
         email: emailCtrl.text.trim(),
         password: passCtrl.text.trim(),
       );
     } else {
-      logger.f("Fail");
     }
   }
 

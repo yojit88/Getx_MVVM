@@ -27,7 +27,6 @@ extension DioExtensions on Dio {
   }) async {
     var result = await safeApiResponseCall(
         request: request, useDefaultErrorHandler: useDefaultErrorHandler);
-    logger.i(result);
 
     switch (result) {
       case DataSuccess<Response>():
